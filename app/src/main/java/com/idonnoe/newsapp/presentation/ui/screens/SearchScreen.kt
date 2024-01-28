@@ -32,7 +32,7 @@ import com.idonnoe.newsapp.presentation.theme.DividerColor
 import com.idonnoe.newsapp.presentation.theme.ScreenBgColor
 import com.idonnoe.newsapp.presentation.theme.TextColor
 import com.idonnoe.newsapp.presentation.ui.composables.ArticlesLoader
-import com.idonnoe.newsapp.presentation.ui.viewmodels.SearchViewModel
+import com.idonnoe.newsapp.presentation.viewmodels.SearchViewModel
 
 @Composable
 fun SearchScreen(
@@ -41,6 +41,7 @@ fun SearchScreen(
 
     val searchViewModel: SearchViewModel = hiltViewModel()
     val articlesState = searchViewModel.articles.collectAsState()
+    val isFirstTime = searchViewModel.isFirstTime.collectAsState()
 
     Column(
         modifier = Modifier
@@ -49,11 +50,13 @@ fun SearchScreen(
     ) {
         Spacer(modifier = Modifier.height(5.dp))
         SearchBar { searchViewModel.searchArticlesByQuery(it) }
-    }
-    Spacer(modifier = Modifier.height(5.dp))
-    Divider(thickness = 2.dp, color = DividerColor)
-    ArticlesLoader(articles = articlesState.value) {
-        onItemClick(it)
+        Spacer(modifier = Modifier.height(5.dp))
+        Divider(thickness = 2.dp, color = DividerColor)
+        if (!isFirstTime.value) {
+            ArticlesLoader(articles = articlesState.value) {
+                onItemClick(it)
+            }
+        }
     }
 }
 

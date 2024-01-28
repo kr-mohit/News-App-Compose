@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.idonnoe.newsapp.presentation.ui.composables.ArticlesLoader
-import com.idonnoe.newsapp.presentation.ui.viewmodels.HomeViewModel
+import com.idonnoe.newsapp.presentation.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(

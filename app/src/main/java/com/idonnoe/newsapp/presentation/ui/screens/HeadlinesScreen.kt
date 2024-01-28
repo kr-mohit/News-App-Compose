@@ -23,8 +23,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,7 +32,7 @@ import com.idonnoe.newsapp.presentation.theme.DividerColor
 import com.idonnoe.newsapp.presentation.theme.ScreenBgColor
 import com.idonnoe.newsapp.presentation.theme.TextColor
 import com.idonnoe.newsapp.presentation.ui.composables.ArticlesLoader
-import com.idonnoe.newsapp.presentation.ui.viewmodels.HeadlinesViewModel
+import com.idonnoe.newsapp.presentation.viewmodels.HeadlinesViewModel
 
 @Composable
 fun HeadlinesScreen(
@@ -57,10 +55,10 @@ fun HeadlinesScreen(
         ) {
             headlineViewModel.getHeadlinesByQuery(it)
         }
-    }
-    if (!isFirstTime.value) {
-        ArticlesLoader(articles = articlesState.value) {
-            onItemClick(it)
+        if (!isFirstTime.value) {
+            ArticlesLoader(articles = articlesState.value) {
+                onItemClick(it)
+            }
         }
     }
 }
@@ -127,40 +125,4 @@ fun TopicItem(data: TopicListData, onItemClick: (text: String) -> Unit) {
             modifier = Modifier.padding(5.dp)
         )
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun Press() {
-    TopicsList(topicList = getDummyTopicsList(), false) {
-
-    }
-}
-
-fun getDummyTopicsList(): List<TopicListData> {
-    val topicList = listOf(
-        "Bitcoin",
-        "Hindu",
-        "Delhi",
-        "Syria vs India",
-        "HDFC Bank",
-        "Ram Bhajan",
-        "Groww",
-        "Republic Day 2024",
-        "Live",
-        "Youtube",
-        "Virat Kohli",
-        "Pran Pratishtha",
-        "Nifty 50"
-    )
-    return topicList.map { TopicListData(it, getRandomColor()) }
-}
-
-fun getRandomColor(): Color {
-    return Color(
-        red = (0..255).random(),
-        green = (0..255).random(),
-        blue = (0..255).random(),
-        alpha = 100
-    )
 }

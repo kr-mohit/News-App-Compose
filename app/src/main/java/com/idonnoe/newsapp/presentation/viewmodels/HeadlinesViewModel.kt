@@ -1,4 +1,4 @@
-package com.idonnoe.newsapp.presentation.ui.viewmodels
+package com.idonnoe.newsapp.presentation.viewmodels
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.LiveData
